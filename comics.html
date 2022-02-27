@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Comics</title>
+    </head>
+
+    <body>
+        <img id="previous" src="images/left-arrow.png" height="100" weight="100">
+        <img id="comic" src="images/js.png">
+        <img id="next" src="images/right-arrow.png" height="100" weight="100">
+        </br>
+        <button id="btn">Pause</button>
+        <button id="random">Random</button>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                var images = ["images/js.png","images/c.png","images/java.png"];
+                var index = 0;
+
+                var timer = setInterval(changePicture, 5000);
+
+                function changePicture(){
+                    $("#next").trigger("click");
+                }
+
+                $("#random").click(function(){
+                    randomNumber = Math.floor(Math.random() * 3);
+                    
+                    $("#comic").attr('src', images[randomNumber]);
+                });
+
+                $("#previous").click(function(){
+                    if (index == 0) {
+                        return;
+                    }
+                    index--;
+
+                    $("#comic").attr('src', images[index]);
+
+                    $("#next").show();
+
+                    if (index == 0) {
+                        $("#previous").hide();
+                    }
+                });
+
+                $("#next").click(function(){
+                    if (index == images.length-1) {
+                        return;
+                    }
+                    index++;
+
+                    $("#comic").attr('src', images[index]);
+
+                    $("#previous").show();
+
+                    if (index == images.length-1) {
+                        $("#next").hide();
+                        clearInterval("#timer");
+                    }
+                });
+
+                $("#previous").hide();
+            });
+
+            
+        </script>
+    </body>
+</html>
